@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 10B - Vocabulary Interactive Worksheet</title>
+<style>
+  :root {
+    --cream: #F8F4EC;
+    --parchment: #F3EDE0;
+    --ink: #1C2421;
+    --ink-soft: #3D4743;
+    --muted: #7A847E;
+    --rule: #D4CBB8;
+    --green: #2A4A38;
+    --green-mid: #3D6B52;
+    --green-soft: #E8F0EB;
+    --gold: #C9A227;
+    --terracotta: #B86B4B;
+    --white: #FFFFFF;
+    --shadow: 0 4px 18px rgba(28,36,33,0.08);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Calibri, system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  .site-header {
+    background: var(--green);
+    color: var(--cream);
+    padding: 1.1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .header-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .brand { font-size: 0.8rem; letter-spacing: 0.12em; opacity: 0.85; text-transform: uppercase; }
+  .brand strong {
+    display: block; font-size: 1.15rem; letter-spacing: 0;
+    margin-top: 0.15rem; text-transform: none; opacity: 1;
+  }
+  .progress-wrap { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; }
+  .progress-bar {
+    width: 140px; height: 8px; background: rgba(255,255,255,0.2);
+    border-radius: 99px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: 0%; background: var(--gold);
+    border-radius: 99px; transition: width 0.4s ease;
+  }
+  .nav {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 1rem 1.25rem 0;
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+  .nav button {
+    border: 1.5px solid var(--rule);
+    background: var(--white);
+    color: var(--ink-soft);
+    padding: 0.4rem 0.85rem;
+    border-radius: 99px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .nav button:hover { border-color: var(--green); color: var(--green); }
+  .nav button.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--cream);
+  }
+  .nav button.done::after { content: " OK"; color: var(--gold); font-size: 0.75rem; }
+  .nav button.ak-btn {
+    margin-left: auto;
+    border-color: var(--gold);
+    color: var(--green);
+  }
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 1.25rem 1.25rem 3.5rem;
+  }
+  section.panel { display: none; }
+  section.panel.active { display: block; }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.75rem;
+    margin-bottom: 0.3rem;
+  }
+  .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.4rem; }
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 0.35rem;
+    margin: 1.6rem 0 0.9rem;
+  }
+  h2 span { color: var(--green); margin-right: 0.35rem; }
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.15rem 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .card.soft { background: var(--green-soft); box-shadow: none; }
+  .word-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+  }
+  .word-card {
+    background: var(--white);
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .word-card:hover { border-color: var(--green-mid); transform: translateY(-2px); }
+  .word-card.flipped { background: var(--green-soft); border-color: var(--green); }
+  .word-card .term {
+    font-weight: 700; font-size: 1.05rem; color: var(--green);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .word-card .pos {
+    font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--muted); background: var(--parchment);
+    padding: 0.15rem 0.45rem; border-radius: 6px;
+  }
+  .word-card .meaning { font-size: 0.9rem; margin-top: 0.45rem; color: var(--ink-soft); display: none; }
+  .word-card.flipped .meaning { display: block; }
+  .word-card .example {
+    font-size: 0.82rem; font-style: italic; color: var(--muted);
+    margin-top: 0.35rem; display: none;
+  }
+  .word-card.flipped .example { display: block; }
+  .flip-hint { font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem; }
+  .match-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  @media (max-width: 640px) { .match-area { grid-template-columns: 1fr; } }
+  .match-list { list-style: none; }
+  .match-item {
+    background: var(--white);
+    border: 1.5px solid var(--rule);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .match-item:hover { border-color: var(--green-mid); }
+  .match-item.selected { border-color: var(--green); background: var(--green-soft); }
+  .match-item.correct { border-color: var(--green); background: #dceee3; }
+  .match-item.wrong { border-color: var(--terracotta); background: #fce8e0; }
+  .match-item .num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--green); color: var(--cream);
+    font-size: 0.8rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .match-item.partner .num { background: var(--terracotta); }
+  .match-feedback {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    min-height: 1.4em;
+    font-weight: 600;
+  }
+  .match-feedback.ok { color: var(--green); }
+  .match-feedback.err { color: var(--terracotta); }
+  .answer-key {
+    display: none;
+    margin-top: 0.9rem;
+    background: var(--green-soft);
+    border: 1.5px solid var(--green);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    font-size: 0.88rem;
+  }
+  .answer-key.show { display: block; }
+  .answer-key strong { color: var(--green); }
+  .answer-key ol { margin: 0.5rem 0 0 1.2rem; color: var(--ink-soft); }
+  .frame-block {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1.5px solid var(--rule);
+    padding: 0.95rem 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  .frame-block .label { font-weight: 700; color: var(--green); font-size: 0.88rem; margin-bottom: 0.4rem; }
+  .frame-block .prompt { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 0.5rem; }
+  .frame-block textarea {
+    width: 100%;
+    border: 1.5px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-family: inherit;
+    min-height: 52px;
+    resize: vertical;
+    outline: none;
+  }
+  .frame-block textarea:focus { border-color: var(--green); }
+  .path-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.55rem;
+    margin-bottom: 1.25rem;
+  }
+  @media (max-width: 700px) { .path-steps { grid-template-columns: 1fr 1fr; } }
+  .path-step {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 0.7rem 0.75rem;
+    text-align: center;
+    border-top: 3px solid var(--green);
+    box-shadow: var(--shadow);
+  }
+  .path-step:nth-child(2) { border-top-color: var(--terracotta); }
+  .path-step:nth-child(3) { border-top-color: var(--gold); }
+  .path-step:nth-child(4) { border-top-color: var(--green-mid); }
+  .path-step strong {
+    display: block; font-size: 0.78rem; letter-spacing: 0.04em;
+    color: var(--green); margin-bottom: 0.25rem;
+  }
+  .path-step span { font-size: 0.8rem; color: var(--ink-soft); }
+  .q-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .q-card h3 { font-size: 0.95rem; margin-bottom: 0.75rem; line-height: 1.4; }
+  .q-card h3 .q-num { color: var(--green); font-weight: 700; margin-right: 0.35rem; }
+  .explore-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+  @media (max-width: 600px) { .explore-grid { grid-template-columns: 1fr; } }
+  .explore-box {
+    background: var(--parchment);
+    border-radius: 10px;
+    padding: 0.65rem 0.75rem;
+  }
+  .explore-box label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--green);
+    margin-bottom: 0.3rem;
+  }
+  .explore-box:nth-child(2) label { color: var(--terracotta); }
+  .explore-box:nth-child(3) label { color: #9a7b1a; }
+  .explore-box:nth-child(4) label { color: var(--green-mid); }
+  .explore-box textarea {
+    width: 100%;
+    border: 1.5px solid transparent;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 0.45rem 0.55rem;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: var(--ink);
+    min-height: 64px;
+    resize: vertical;
+    outline: none;
+  }
+  .explore-box textarea:focus { border-color: var(--green); }
+  .prompt-choice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 600px) { .prompt-choice { grid-template-columns: 1fr; } }
+  .prompt-opt {
+    border: 2px solid var(--rule);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    background: var(--white);
+    transition: all 0.2s;
+  }
+  .prompt-opt:hover { border-color: var(--green-mid); }
+  .prompt-opt.selected { border-color: var(--green); background: var(--green-soft); }
+  .prompt-opt strong { display: block; color: var(--green); margin-bottom: 0.3rem; font-size: 0.9rem; }
+  .prompt-opt p { font-size: 0.85rem; color: var(--ink-soft); }
+  .writing-area textarea {
+    width: 100%;
+    min-height: 180px;
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--white);
+    resize: vertical;
+    outline: none;
+    line-height: 1.55;
+  }
+  .writing-area textarea:focus { border-color: var(--green); }
+  .word-count {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    text-align: right;
+  }
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.45rem 0;
+    font-size: 0.92rem;
+  }
+  .checklist input[type="checkbox"] {
+    width: 18px; height: 18px;
+    accent-color: var(--green);
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+  }
+  .tracker { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tracker label {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--white);
+    border: 1.5px solid var(--rule);
+    border-radius: 99px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+  .tracker input { accent-color: var(--green); }
+  .btn-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1.1rem;
+  }
+  .btn {
+    border: none;
+    border-radius: 99px;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-primary { background: var(--green); color: var(--cream); }
+  .btn-primary:hover { background: var(--green-mid); }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--green);
+    border: 1.5px solid var(--green);
+  }
+  .btn-secondary:hover { background: var(--green-soft); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1.5px solid var(--rule);
+  }
+  .ak-block {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1.5px solid var(--rule);
+    padding: 1rem 1.15rem;
+    margin-bottom: 0.85rem;
+  }
+  .ak-block h3 {
+    font-size: 0.95rem;
+    color: var(--green);
+    margin-bottom: 0.55rem;
+    font-family: Georgia, serif;
+  }
+  .ak-block ol, .ak-block ul {
+    margin-left: 1.2rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .ak-block li { margin-bottom: 0.4rem; line-height: 1.45; }
+  .ak-block .sample {
+    background: var(--parchment);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+    margin: 0.35rem 0 0.55rem;
+    font-size: 0.88rem;
+    color: var(--ink);
+    border-left: 3px solid var(--green);
+  }
+  .ak-note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.4rem;
+  }
+  .toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--green);
+    color: var(--cream);
+    padding: 0.7rem 1.4rem;
+    border-radius: 99px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.35s ease;
+    z-index: 200;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      Reading Explorer 4 - Unit 10B
+      <strong>Vocabulary Interactive Worksheet</strong>
+    </div>
+    <div class="progress-wrap">
+      <span id="progressLabel">0 / 5 sections</span>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" id="mainNav">
+  <button type="button" data-panel="words" class="active">A - Words</button>
+  <button type="button" data-panel="match">B - Match</button>
+  <button type="button" data-panel="frames">C - Frames</button>
+  <button type="button" data-panel="explore">D - Explore</button>
+  <button type="button" data-panel="write">E - Write</button>
+  <button type="button" data-panel="answers" class="ak-btn">Answer Key</button>
+</nav>
+
+<main>
+  <section class="panel active" id="words">
+    <h1>Word Bank</h1>
+    <p class="subtitle">Tap each card to reveal meaning and example.</p>
+    <div class="word-grid" id="wordGrid"></div>
+    <p class="flip-hint">Tip: Flip every card once, then remember at least 4 words to use later.</p>
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="btnToMatch">Next: Collocations</button>
+    </div>
+  </section>
+
+  <section class="panel" id="match">
+    <h1>Collocations</h1>
+    <p class="subtitle">Click one item from the left, then its partner on the right. Match all six.</p>
+    <div class="match-area">
+      <ul class="match-list" id="leftList"></ul>
+      <ul class="match-list" id="rightList"></ul>
+    </div>
+    <div class="match-feedback" id="matchFeedback"></div>
+    <div class="answer-key" id="answerKey">
+      <strong>Answer Key - Collocations</strong>
+      <ol>
+        <li><strong>exceptional longevity</strong></li>
+        <li><strong>a lean diet / lifestyle</strong></li>
+        <li><strong>relieve stress / pain</strong></li>
+        <li><strong>a special privilege</strong></li>
+        <li><strong>follow / give guidelines</strong></li>
+        <li><strong>forbid / discourage smoking / alcohol / red meat</strong></li>
+      </ol>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-ghost" id="btnResetMatch">Reset</button>
+      <button type="button" class="btn btn-secondary" id="btnToggleAK">Show / Hide Answer Key</button>
+      <button type="button" class="btn btn-primary" id="btnToFrames">Next: Sentence Frames</button>
+    </div>
+  </section>
+
+  <section class="panel" id="frames">
+    <h1>Sentence Frames</h1>
+    <p class="subtitle">Complete at least 4 frames. Use the target word correctly and try to add a connector.</p>
+    <div id="framesContainer"></div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btnSaveFrames">Save drafts</button>
+      <button type="button" class="btn btn-primary" id="btnToExplore">Next: Explore Questions</button>
+    </div>
+  </section>
+
+  <section class="panel" id="explore">
+    <h1>Explore the Questions</h1>
+    <p class="subtitle">Do not just answer - dig in. Use the Exploration Path for each question with a partner.</p>
+    <div class="path-steps">
+      <div class="path-step"><strong>1 RECALL</strong><span>What does the text say?</span></div>
+      <div class="path-step"><strong>2 CONNECT</strong><span>What about your world?</span></div>
+      <div class="path-step"><strong>3 SUPPORT</strong><span>Evidence + connector</span></div>
+      <div class="path-step"><strong>4 PUSH DEEPER</strong><span>What else could be true?</span></div>
+    </div>
+    <div id="questionsContainer"></div>
+    <div class="card soft" style="margin-top:1rem">
+      <strong style="color:var(--green)">Dialogue stems for your partner</strong>
+      <p style="font-size:0.88rem;margin-top:0.4rem;color:var(--ink-soft)">
+        "Can you point to the part of the reading that made you think that?" -
+        "How is that similar to or different from your life?" -
+        "What would someone who disagrees say?" -
+        "Can you add for example or as a result?"
+      </p>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btnSaveExplore">Save notes</button>
+      <button type="button" class="btn btn-primary" id="btnToWrite">Next: Mini Writing</button>
+    </div>
+  </section>
+
+  <section class="panel" id="write">
+    <h1>Mini Writing Task</h1>
+    <p class="subtitle">Choose one prompt. Aim for 5-7 sentences and at least 5 target words.</p>
+    <div class="prompt-choice" id="promptChoice">
+      <div class="prompt-opt" data-prompt="A" id="promptA">
+        <strong>Prompt A</strong>
+        <p>What is your personal guideline for a long and healthy life? Support with examples from the reading and your experience.</p>
+      </div>
+      <div class="prompt-opt" data-prompt="B" id="promptB">
+        <strong>Prompt B</strong>
+        <p>Explain why social relationships (moai / ikigai) might be as important as diet for longevity. Use evidence from the text.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <strong style="color:var(--green);font-size:0.9rem">Pre-write exploration</strong>
+      <div class="explore-grid" style="margin-top:0.6rem">
+        <div class="explore-box">
+          <label>Recall - text idea</label>
+          <textarea id="preRecall" placeholder="One strong idea from the reading..."></textarea>
+        </div>
+        <div class="explore-box">
+          <label>Connect - my world</label>
+          <textarea id="preConnect" placeholder="How this links to young people..."></textarea>
+        </div>
+        <div class="explore-box">
+          <label>Support - evidence + connector</label>
+          <textarea id="preSupport" placeholder="Fact / name / number + because / for example..."></textarea>
+        </div>
+        <div class="explore-box">
+          <label>Push deeper</label>
+          <textarea id="prePush" placeholder="Counter-idea or extra reason..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="writing-area">
+      <textarea id="essay" placeholder="Write your paragraph here..."></textarea>
+      <div class="word-count"><span id="wordCount">0</span> words - aim for 80-150</div>
+    </div>
+    <h2><span>05</span> Target Word Tracker</h2>
+    <div class="tracker" id="tracker"></div>
+    <h2><span>OK</span> Self-Check</h2>
+    <div class="card soft">
+      <ul class="checklist">
+        <li><input type="checkbox" id="c1" /> <label for="c1">I used at least 5 different words from the Word Bank.</label></li>
+        <li><input type="checkbox" id="c2" /> <label for="c2">Each word is used in a grammatically correct sentence.</label></li>
+        <li><input type="checkbox" id="c3" /> <label for="c3">I included at least one logical connector (because, for example, as a result, in addition).</label></li>
+        <li><input type="checkbox" id="c4" /> <label for="c4">My paragraph has a clear main idea and specific examples.</label></li>
+      </ul>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btnSaveWriting">Save writing</button>
+      <button type="button" class="btn btn-primary" id="btnFinish">Finish worksheet</button>
+    </div>
+  </section>
+
+  <section class="panel" id="answers">
+    <h1>Answer Key</h1>
+    <p class="subtitle">Check your work. Sample answers show one possible way - your ideas can differ if the words are used correctly.</p>
+    <div class="ak-block">
+      <h3>B - Collocations</h3>
+      <ol>
+        <li><strong>exceptional longevity</strong> - living an unusually long life</li>
+        <li><strong>a lean diet / lifestyle</strong> - low-fat food and healthy habits</li>
+        <li><strong>relieve stress / pain</strong> - reduce worry or discomfort</li>
+        <li><strong>a special privilege</strong> - a rare advantage or gift</li>
+        <li><strong>follow / give guidelines</strong> - use or offer rules for living well</li>
+        <li><strong>forbid / discourage smoking / alcohol / red meat</strong> - not allow or try to stop unhealthy habits</li>
+      </ol>
+    </div>
+    <div class="ak-block">
+      <h3>C - Sentence Frames - Sample Completions</h3>
+      <p class="ak-note">These are model answers. Yours may differ.</p>
+      <p style="font-size:0.82rem;font-weight:700;color:var(--green);margin-top:0.6rem">longevity</p>
+      <div class="sample">One key factor in longevity is strong social connections, because friends and family can relieve stress and give life purpose.</div>
+      <p style="font-size:0.82rem;font-weight:700;color:var(--green)">guideline</p>
+      <div class="sample">A useful guideline for a healthy life is to stay active every day. For example, people in Sardinia work hard on farms and walk a lot.</div>
+      <p style="font-size:0.82rem;font-weight:700;color:var(--green)">industrious</p>
+      <div class="sample">Being industrious can help people live longer. In the reading, Tonino shows this because he works hard with his cows and stays busy.</div>
+      <p style="font-size:0.82rem;font-weight:700;color:var(--green)">forbid / discourage</p>
+      <div class="sample">Some communities forbid smoking and alcohol. They also discourage eating a lot of red meat in order to protect health and live longer.</div>
+      <p style="font-size:0.82rem;font-weight:700;color:var(--green)">lean</p>
+      <div class="sample">A lean diet means eating food that is low in fat. In Okinawa, people eat local vegetables and stop when they are 80% full.</div>
+      <p style="font-size:0.82rem;font-weight:700;color:var(--green)">ironically</p>
+      <div class="sample">Ironically, the healthy Okinawan diet actually helped people live longer, even though it was born of hardship and poverty.</div>
+      <p style="font-size:0.82rem;font-weight:700;color:var(--green)">relieve</p>
+      <div class="sample">Spending time with friends can relieve stress. As a result, people may enjoy better health and greater longevity.</div>
+      <p style="font-size:0.82rem;font-weight:700;color:var(--green)">ikigai / moai</p>
+      <div class="sample">My ikigai is learning and helping my classmates. Having a moai (support group) is important because it gives emotional support and purpose.</div>
+    </div>
+    <div class="ak-block">
+      <h3>D - Explore and E - Write</h3>
+      <p style="font-size:0.9rem;color:var(--ink-soft);margin-bottom:0.5rem">There is no single correct answer. Strong responses should include:</p>
+      <ul>
+        <li>A clear claim (your main idea)</li>
+        <li>Specific evidence from the reading (name, place, number, or habit)</li>
+        <li>At least one logical connector (because, for example, as a result, in addition, however)</li>
+        <li>A personal connection or deeper thought (Connect / Push Deeper)</li>
+      </ul>
+      <p class="ak-note">Use the model paragraph from the lesson PowerPoint: Claim - Evidence - Explanation.</p>
+    </div>
+    <div class="card soft">
+      <strong style="color:var(--green)">Teacher tip</strong>
+      <p style="font-size:0.88rem;margin-top:0.35rem;color:var(--ink-soft)">
+        You can hide this Answer Key tab during class and reveal it later, or let students check their own work after they finish.
+      </p>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btnBackMatch">Back to Match</button>
+      <button type="button" class="btn btn-primary" id="btnGoWrite">Go to Writing</button>
+    </div>
+  </section>
+</main>
+
+<footer>Unit 10B - In Search of Longevity - Interactive Vocabulary Worksheet</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  "use strict";
+  var WORDS = [
+    { term: "longevity", pos: "noun", meaning: "a long life; living for many years", example: "...regions where exceptional longevity is the norm" },
+    { term: "guideline", pos: "noun", meaning: "a general rule or piece of advice", example: "...three sets of guidelines to follow" },
+    { term: "industrious", pos: "adjective", meaning: "hardworking; always busy doing useful work", example: "the industrious Tonino has already milked four cows..." },
+    { term: "barely", pos: "adverb", meaning: "only just; almost not", example: "her head is barely higher than the steering wheel" },
+    { term: "privilege", pos: "noun", meaning: "a special advantage or opportunity", example: "...the privilege of living so long" },
+    { term: "forbid", pos: "verb", meaning: "to officially not allow something", example: "It forbids smoking, alcohol consumption..." },
+    { term: "discourage", pos: "verb", meaning: "to try to stop someone from doing something", example: "The church also discourages the consumption of other meat..." },
+    { term: "lean (diet)", pos: "adjective", meaning: "low in fat; not heavy or rich", example: "A lean diet of food grown on the island..." },
+    { term: "ironically", pos: "adverb", meaning: "in a way opposite to what you might expect", example: "Ironically, this healthy way of eating was born of hardship." },
+    { term: "relieve", pos: "verb", meaning: "to reduce or remove pain, stress, or a problem", example: "...which helps to relieve stress" },
+    { term: "moai", pos: "noun", meaning: "a mutual support group of friends (Okinawa)", example: "Many older Okinawans belong to a moai..." },
+    { term: "ikigai", pos: "noun", meaning: "what makes one's life worth living; life purpose", example: "My ikigai is right here... (her friends)" }
+  ];
+  var PAIRS = [
+    { id: 1, left: "exceptional _______________", right: "longevity" },
+    { id: 2, left: "a lean _______________", right: "diet / lifestyle" },
+    { id: 3, left: "relieve _______________", right: "stress / pain" },
+    { id: 4, left: "a special _______________", right: "privilege" },
+    { id: 5, left: "follow / give _______________", right: "guidelines" },
+    { id: 6, left: "forbid / discourage _______________", right: "smoking / alcohol / red meat" }
+  ];
+  var FRAMES = [
+    { word: "longevity", prompt: "One key factor in longevity is ________, because ________." },
+    { word: "guideline", prompt: "A useful guideline for a healthy life is to ________. For example, ________." },
+    { word: "industrious", prompt: "Being industrious can help people live longer. In the reading, ________ shows this because ________." },
+    { word: "forbid / discourage", prompt: "Some communities forbid ________. They also discourage ________ in order to ________." },
+    { word: "lean", prompt: "A lean diet means ________. In Okinawa, people ________." },
+    { word: "ironically", prompt: "Ironically, ________ actually helped people live longer, even though ________." },
+    { word: "relieve", prompt: "Spending time with friends can relieve stress. As a result, ________." },
+    { word: "ikigai / moai", prompt: "My ikigai is ________. Having a moai (support group) is important because ________." }
+  ];
+  var QUESTIONS = [
+    { q: "Which longevity guideline from the reading do you think is most important for young people today? Why?", recall: "Which guideline? (hard work / diet / friends / purpose / clean living)", connect: "Why does this matter for students your age?", support: "For example / Because... (use a detail from the text)", push: "Would this still be true in 20 years? Why or why not?" },
+    { q: "Do you have something like a moai or ikigai in your life? Explain.", recall: "What is a moai? What is ikigai? (use the Word Bank)", connect: "Who or what gives you support / purpose?", support: "For example... / As a result...", push: "What would change if you lost that support or purpose?" },
+    { q: "What does your family forbid or discourage? Do you agree with those rules?", recall: "What do Adventists / Okinawans forbid or discourage?", connect: "One family rule that limits food, screens, or habits...", support: "I agree / disagree because...", push: "Is the rule about health, safety, or culture?" },
+    { q: "Describe an industrious person you know. How does their hard work affect their health or happiness?", recall: "How is Tonino (Sardinia) industrious?", connect: "Name the person. What work do they do?", support: "As a result / Therefore, their health or mood...", push: "Can too much hard work hurt longevity? When?" },
+    { q: "Ironically, some healthy habits come from difficult times. Can you think of an example from your family or culture?", recall: "What was ironic about the Okinawan diet?", connect: "A hard time that taught a healthy habit...", support: "Ironically... / Even though...", push: "Should we wait for hardship to build good habits?" }
+  ];
+  var done = {};
+  var selectedLeft = null;
+  var selectedRight = null;
+  var matched = {};
+  function $(id) { return document.getElementById(id); }
+  function qsa(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function storageGet(key, fallback) {
+    try { var v = window.localStorage.getItem(key); return v === null || v === undefined ? fallback : v; }
+    catch (e) { return fallback; }
+  }
+  function storageSet(key, val) { try { window.localStorage.setItem(key, val); } catch (e) {} }
+  function toast(msg) {
+    var t = $("toast"); if (!t) return;
+    t.textContent = msg; t.classList.add("show");
+    setTimeout(function () { t.classList.remove("show"); }, 2200);
+  }
+  function updateProgress() {
+    var n = 0; for (var k in done) { if (done.hasOwnProperty(k)) n++; }
+    var fill = $("progressFill"); var label = $("progressLabel");
+    if (fill) fill.style.width = (n / 5) * 100 + "%";
+    if (label) label.textContent = n + " / 5 sections";
+  }
+  function markDone(id) {
+    done[id] = true;
+    var arr = []; for (var k in done) { if (done.hasOwnProperty(k)) arr.push(k); }
+    storageSet("u10b_done", JSON.stringify(arr));
+    qsa("#mainNav button").forEach(function (b) {
+      var p = b.getAttribute("data-panel");
+      if (p && done[p]) b.classList.add("done");
+    });
+    updateProgress();
+  }
+  function goTo(id) {
+    var panel = $(id); if (!panel) return;
+    qsa("section.panel").forEach(function (p) { p.classList.remove("active"); });
+    panel.classList.add("active");
+    qsa("#mainNav button").forEach(function (b) {
+      if (b.getAttribute("data-panel") === id) b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+  function renderWords() {
+    var grid = $("wordGrid"); if (!grid) return;
+    var html = "";
+    for (var i = 0; i < WORDS.length; i++) {
+      var w = WORDS[i];
+      html += '<div class="word-card" data-i="' + i + '">';
+      html += '<div class="term">' + w.term + ' <span class="pos">' + w.pos + "</span></div>";
+      html += '<div class="meaning">' + w.meaning + "</div>";
+      html += '<div class="example">' + w.example + "</div></div>";
+    }
+    grid.innerHTML = html;
+    qsa(".word-card", grid).forEach(function (card) {
+      card.onclick = function () { card.classList.toggle("flipped"); };
+    });
+  }
+  function renderMatch() {
+    var rights = [];
+    for (var i = 0; i < PAIRS.length; i++) rights.push({ id: PAIRS[i].id, text: PAIRS[i].right });
+    for (var a = rights.length - 1; a > 0; a--) {
+      var b = Math.floor(Math.random() * (a + 1));
+      var tmp = rights[a]; rights[a] = rights[b]; rights[b] = tmp;
+    }
+    var leftList = $("leftList"); var rightList = $("rightList");
+    if (!leftList || !rightList) return;
+    var leftHtml = "";
+    for (var j = 0; j < PAIRS.length; j++) {
+      var p = PAIRS[j];
+      leftHtml += '<li class="match-item" data-side="left" data-id="' + p.id + '">';
+      leftHtml += '<span class="num">' + p.id + "</span><span>" + p.left + "</span></li>";
+    }
+    leftList.innerHTML = leftHtml;
+    var rightHtml = "";
+    for (var r = 0; r < rights.length; r++) {
+      var item = rights[r];
+      rightHtml += '<li class="match-item partner" data-side="right" data-id="' + item.id + '">';
+      rightHtml += '<span class="num">' + String.fromCharCode(97 + r) + "</span><span>" + item.text + "</span></li>";
+    }
+    rightList.innerHTML = rightHtml;
+    qsa(".match-item").forEach(function (el) {
+      el.onclick = function () { selectMatch(el); };
+    });
+  }
+  function selectMatch(el) {
+    if (el.classList.contains("correct")) return;
+    var side = el.getAttribute("data-side");
+    var id = parseInt(el.getAttribute("data-id"), 10);
+    if (side === "left") {
+      qsa('[data-side="left"]').forEach(function (e) { e.classList.remove("selected"); });
+      el.classList.add("selected"); selectedLeft = id;
+    } else {
+      qsa('[data-side="right"]').forEach(function (e) { e.classList.remove("selected"); });
+      el.classList.add("selected"); selectedRight = id;
+    }
+    if (selectedLeft && selectedRight) checkPair();
+  }
+  function checkPair() {
+    var fb = $("matchFeedback");
+    var leftEl = document.querySelector('[data-side="left"][data-id="' + selectedLeft + '"]');
+    var rightEl = document.querySelector('[data-side="right"][data-id="' + selectedRight + '"]');
+    if (!leftEl || !rightEl) return;
+    if (selectedLeft === selectedRight) {
+      leftEl.classList.remove("selected"); rightEl.classList.remove("selected");
+      leftEl.classList.add("correct"); rightEl.classList.add("correct");
+      matched[selectedLeft] = true;
+      if (fb) { fb.textContent = "Correct!"; fb.className = "match-feedback ok"; }
+      var count = 0; for (var k in matched) { if (matched.hasOwnProperty(k)) count++; }
+      if (count === 6) { if (fb) fb.textContent = "All matched! Great work."; markDone("match"); }
+    } else {
+      leftEl.classList.add("wrong"); rightEl.classList.add("wrong");
+      if (fb) { fb.textContent = "Not a match - try again."; fb.className = "match-feedback err"; }
+      setTimeout(function () {
+        leftEl.classList.remove("wrong", "selected");
+        rightEl.classList.remove("wrong", "selected");
+      }, 500);
+    }
+    selectedLeft = null; selectedRight = null;
+  }
+  function resetMatch() {
+    matched = {}; selectedLeft = null; selectedRight = null;
+    var fb = $("matchFeedback");
+    if (fb) { fb.textContent = ""; fb.className = "match-feedback"; }
+    var ak = $("answerKey"); if (ak) ak.classList.remove("show");
+    renderMatch();
+  }
+  function toggleAnswerKey() {
+    var ak = $("answerKey"); if (ak) ak.classList.toggle("show");
+  }
+  function renderFrames() {
+    var box = $("framesContainer"); if (!box) return;
+    var saved = {};
+    try { saved = JSON.parse(storageGet("u10b_frames", "{}")) || {}; } catch (e) { saved = {}; }
+    var html = "";
+    for (var i = 0; i < FRAMES.length; i++) {
+      var f = FRAMES[i]; var val = saved[i] ? saved[i] : "";
+      html += '<div class="frame-block"><div class="label">' + f.word + "</div>";
+      html += '<div class="prompt">' + f.prompt + "</div>";
+      html += '<textarea data-frame="' + i + '" placeholder="Write your completed sentence...">' + val + "</textarea></div>";
+    }
+    box.innerHTML = html;
+    qsa("[data-frame]", box).forEach(function (ta) { ta.oninput = function () { autoSaveFrame(ta); }; });
+  }
+  function autoSaveFrame(el) {
+    var saved = {};
+    try { saved = JSON.parse(storageGet("u10b_frames", "{}")) || {}; } catch (e) { saved = {}; }
+    saved[el.getAttribute("data-frame")] = el.value;
+    storageSet("u10b_frames", JSON.stringify(saved));
+  }
+  function saveFrames() {
+    qsa("[data-frame]").forEach(autoSaveFrame);
+    toast("Sentence frames saved");
+  }
+  function renderQuestions() {
+    var box = $("questionsContainer"); if (!box) return;
+    var saved = {};
+    try { saved = JSON.parse(storageGet("u10b_explore", "{}")) || {}; } catch (e) { saved = {}; }
+    var html = "";
+    for (var i = 0; i < QUESTIONS.length; i++) {
+      var q = QUESTIONS[i]; var s = saved[i] || {};
+      html += '<div class="q-card"><h3><span class="q-num">Q' + (i + 1) + "</span>" + q.q + "</h3><div class="explore-grid">";
+      html += fieldBox(i, "recall", "Recall - text idea", q.recall, s.recall);
+      html += fieldBox(i, "connect", "Connect - my world", q.connect, s.connect);
+      html += fieldBox(i, "support", "Support - evidence + connector", q.support, s.support);
+      html += fieldBox(i, "push", "Push deeper", q.push, s.push);
+      html += "</div></div>";
+    }
+    box.innerHTML = html;
+    qsa("[data-ex]", box).forEach(function (ta) { ta.oninput = autoSaveExplore; });
+  }
+  function fieldBox(i, key, label, placeholder, value) {
+    return '<div class="explore-box"><label>' + label + '</label><textarea data-ex="' + i + '-' + key + '" placeholder="' + placeholder + '">' + (value || "") + "</textarea></div>";
+  }
+  function autoSaveExplore() {
+    var data = {};
+    for (var i = 0; i < QUESTIONS.length; i++) {
+      var r = document.querySelector('[data-ex="' + i + '-recall"]');
+      var c = document.querySelector('[data-ex="' + i + '-connect"]');
+      var s = document.querySelector('[data-ex="' + i + '-support"]');
+      var p = document.querySelector('[data-ex="' + i + '-push"]');
+      data[i] = { recall: r ? r.value : "", connect: c ? c.value : "", support: s ? s.value : "", push: p ? p.value : "" };
+    }
+    storageSet("u10b_explore", JSON.stringify(data));
+  }
+  function saveExplore() { autoSaveExplore(); toast("Exploration notes saved"); }
+  function renderTracker() {
+    var box = $("tracker"); if (!box) return;
+    var html = "";
+    for (var i = 0; i < WORDS.length; i++) html += '<label><input type="checkbox" /> ' + WORDS[i].term + "</label>";
+    box.innerHTML = html;
+  }
+  function selectPrompt(el) {
+    qsa(".prompt-opt").forEach(function (e) { e.classList.remove("selected"); });
+    el.classList.add("selected");
+    storageSet("u10b_prompt", el.getAttribute("data-prompt"));
+  }
+  function updateWordCount() {
+    var essay = $("essay"); if (!essay) return;
+    var text = essay.value.replace(/^\s+|\s+$/g, "");
+    var n = text ? text.split(/\s+/).length : 0;
+    var wc = $("wordCount"); if (wc) wc.textContent = String(n);
+    storageSet("u10b_essay", essay.value);
+  }
+  function saveWriting() {
+    var essay = $("essay"); if (essay) storageSet("u10b_essay", essay.value);
+    storageSet("u10b_pre", JSON.stringify({
+      recall: ($("preRecall") && $("preRecall").value) || "",
+      connect: ($("preConnect") && $("preConnect").value) || "",
+      support: ($("preSupport") && $("preSupport").value) || "",
+      push: ($("prePush") && $("prePush").value) || ""
+    }));
+    toast("Writing saved on this device");
+  }
+  function restoreWriting() {
+    var essayVal = storageGet("u10b_essay", "");
+    var essay = $("essay");
+    if (essay && essayVal) { essay.value = essayVal; updateWordCount(); }
+    try {
+      var pre = JSON.parse(storageGet("u10b_pre", "{}")) || {};
+      if (pre.recall && $("preRecall")) $("preRecall").value = pre.recall;
+      if (pre.connect && $("preConnect")) $("preConnect").value = pre.connect;
+      if (pre.support && $("preSupport")) $("preSupport").value = pre.support;
+      if (pre.push && $("prePush")) $("prePush").value = pre.push;
+    } catch (e) {}
+    var prompt = storageGet("u10b_prompt", "");
+    if (prompt) {
+      var el = document.querySelector('.prompt-opt[data-prompt="' + prompt + '"]');
+      if (el) el.classList.add("selected");
+    }
+  }
+  function finishAll() { markDone("write"); toast("Worksheet complete - great work exploring longevity!"); }
+  function bindNav() {
+    qsa("#mainNav button").forEach(function (btn) {
+      btn.onclick = function () {
+        var panel = btn.getAttribute("data-panel");
+        if (panel) goTo(panel);
+      };
+      var p = btn.getAttribute("data-panel");
+      if (p && done[p]) btn.classList.add("done");
+    });
+  }
+  function bindButtons() {
+    var map = [
+      ["btnToMatch", function () { markDone("words"); goTo("match"); }],
+      ["btnResetMatch", resetMatch],
+      ["btnToggleAK", toggleAnswerKey],
+      ["btnToFrames", function () { markDone("match"); goTo("frames"); }],
+      ["btnSaveFrames", saveFrames],
+      ["btnToExplore", function () { markDone("frames"); goTo("explore"); }],
+      ["btnSaveExplore", saveExplore],
+      ["btnToWrite", function () { markDone("explore"); goTo("write"); }],
+      ["btnSaveWriting", saveWriting],
+      ["btnFinish", finishAll],
+      ["btnBackMatch", function () { goTo("match"); }],
+      ["btnGoWrite", function () { goTo("write"); }],
+      ["promptA", function () { selectPrompt($("promptA")); }],
+      ["promptB", function () { selectPrompt($("promptB")); }]
+    ];
+    for (var i = 0; i < map.length; i++) {
+      var el = $(map[i][0]);
+      if (el) el.onclick = map[i][1];
+    }
+    var essay = $("essay");
+    if (essay) essay.oninput = updateWordCount;
+  }
+  function loadDone() {
+    try {
+      var arr = JSON.parse(storageGet("u10b_done", "[]")) || [];
+      for (var i = 0; i < arr.length; i++) done[arr[i]] = true;
+    } catch (e) { done = {}; }
+  }
+  function init() {
+    try {
+      loadDone(); renderWords(); renderMatch(); renderFrames();
+      renderQuestions(); renderTracker(); updateProgress();
+      restoreWriting(); bindNav(); bindButtons();
+    } catch (err) {
+      if (window.console && console.error) console.error("Init error:", err);
+      toast("Something went wrong loading the worksheet.");
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
