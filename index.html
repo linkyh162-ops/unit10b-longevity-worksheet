@@ -1,1 +1,351 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unit 10B - Vocabulary Interactive Worksheet</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      Reading Explorer 4 - Unit 10B
+      <strong>Vocabulary Interactive Worksheet</strong>
+    </div>
+    <div class="progress-wrap">
+      <span id="progressLabel">0 / 5 sections</span>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" id="mainNav">
+  <button type="button" data-panel="words" class="active">A - Words</button>
+  <button type="button" data-panel="match">B - Match</button>
+  <button type="button" data-panel="frames">C - Frames</button>
+  <button type="button" data-panel="explore">D - Explore</button>
+  <button type="button" data-panel="write">E - Write</button>
+  <button type="button" data-panel="answers" class="ak-btn">Answer Key</button>
+</nav>
+
+<main>
+  <section class="panel active" id="words">
+    <h1>Word Bank</h1>
+    <p class="subtitle">Tap each card to reveal meaning and example.</p>
+    <div class="word-grid" id="wordGrid">
+      <div class="word-card">
+        <div class="term">longevity <span class="pos">noun</span></div>
+        <div class="meaning">a long life; living for many years</div>
+        <div class="example">...regions where exceptional longevity is the norm</div>
+      </div>
+      <div class="word-card">
+        <div class="term">guideline <span class="pos">noun</span></div>
+        <div class="meaning">a general rule or piece of advice</div>
+        <div class="example">...three sets of guidelines to follow</div>
+      </div>
+      <div class="word-card">
+        <div class="term">industrious <span class="pos">adjective</span></div>
+        <div class="meaning">hardworking; always busy doing useful work</div>
+        <div class="example">the industrious Tonino has already milked four cows...</div>
+      </div>
+      <div class="word-card">
+        <div class="term">barely <span class="pos">adverb</span></div>
+        <div class="meaning">only just; almost not</div>
+        <div class="example">her head is barely higher than the steering wheel</div>
+      </div>
+      <div class="word-card">
+        <div class="term">privilege <span class="pos">noun</span></div>
+        <div class="meaning">a special advantage or opportunity</div>
+        <div class="example">...the privilege of living so long</div>
+      </div>
+      <div class="word-card">
+        <div class="term">forbid <span class="pos">verb</span></div>
+        <div class="meaning">to officially not allow something</div>
+        <div class="example">It forbids smoking, alcohol consumption...</div>
+      </div>
+      <div class="word-card">
+        <div class="term">discourage <span class="pos">verb</span></div>
+        <div class="meaning">to try to stop someone from doing something</div>
+        <div class="example">The church also discourages the consumption of other meat...</div>
+      </div>
+      <div class="word-card">
+        <div class="term">lean (diet) <span class="pos">adjective</span></div>
+        <div class="meaning">low in fat; not heavy or rich</div>
+        <div class="example">A lean diet of food grown on the island...</div>
+      </div>
+      <div class="word-card">
+        <div class="term">ironically <span class="pos">adverb</span></div>
+        <div class="meaning">in a way opposite to what you might expect</div>
+        <div class="example">Ironically, this healthy way of eating was born of hardship.</div>
+      </div>
+      <div class="word-card">
+        <div class="term">relieve <span class="pos">verb</span></div>
+        <div class="meaning">to reduce or remove pain, stress, or a problem</div>
+        <div class="example">...which helps to relieve stress</div>
+      </div>
+      <div class="word-card">
+        <div class="term">moai <span class="pos">noun</span></div>
+        <div class="meaning">a mutual support group of friends (Okinawa)</div>
+        <div class="example">Many older Okinawans belong to a moai...</div>
+      </div>
+      <div class="word-card">
+        <div class="term">ikigai <span class="pos">noun</span></div>
+        <div class="meaning">what makes one's life worth living; life purpose</div>
+        <div class="example">My ikigai is right here... (her friends)</div>
+      </div>
+    </div>
+    <p class="flip-hint">Tip: Flip every card once, then remember at least 4 words to use later.</p>
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="btnToMatch">Next: Collocations</button>
+    </div>
+  </section>
+
+  <section class="panel" id="match">
+    <h1>Collocations</h1>
+    <p class="subtitle">Click one item from the left, then its partner on the right. Match all six.</p>
+    <div class="match-area">
+      <ul class="match-list" id="leftList">
+        <li class="match-item" data-side="left" data-id="1"><span class="num">1</span><span>exceptional _______________</span></li>
+        <li class="match-item" data-side="left" data-id="2"><span class="num">2</span><span>a lean _______________</span></li>
+        <li class="match-item" data-side="left" data-id="3"><span class="num">3</span><span>relieve _______________</span></li>
+        <li class="match-item" data-side="left" data-id="4"><span class="num">4</span><span>a special _______________</span></li>
+        <li class="match-item" data-side="left" data-id="5"><span class="num">5</span><span>follow / give _______________</span></li>
+        <li class="match-item" data-side="left" data-id="6"><span class="num">6</span><span>forbid / discourage _______________</span></li>
+      </ul>
+      <ul class="match-list" id="rightList">
+        <li class="match-item partner" data-side="right" data-id="3"><span class="num">a</span><span>stress / pain</span></li>
+        <li class="match-item partner" data-side="right" data-id="1"><span class="num">b</span><span>longevity</span></li>
+        <li class="match-item partner" data-side="right" data-id="5"><span class="num">c</span><span>guidelines</span></li>
+        <li class="match-item partner" data-side="right" data-id="2"><span class="num">d</span><span>diet / lifestyle</span></li>
+        <li class="match-item partner" data-side="right" data-id="6"><span class="num">e</span><span>smoking / alcohol / red meat</span></li>
+        <li class="match-item partner" data-side="right" data-id="4"><span class="num">f</span><span>privilege</span></li>
+      </ul>
+    </div>
+    <div class="match-feedback" id="matchFeedback"></div>
+    <div class="answer-key" id="answerKey">
+      <strong>Answer Key - Collocations</strong>
+      <ol>
+        <li><strong>exceptional longevity</strong></li>
+        <li><strong>a lean diet / lifestyle</strong></li>
+        <li><strong>relieve stress / pain</strong></li>
+        <li><strong>a special privilege</strong></li>
+        <li><strong>follow / give guidelines</strong></li>
+        <li><strong>forbid / discourage smoking / alcohol / red meat</strong></li>
+      </ol>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-ghost" id="btnResetMatch">Reset</button>
+      <button type="button" class="btn btn-secondary" id="btnToggleAK">Show / Hide Answer Key</button>
+      <button type="button" class="btn btn-primary" id="btnToFrames">Next: Sentence Frames</button>
+    </div>
+  </section>
+
+  <section class="panel" id="frames">
+    <h1>Sentence Frames</h1>
+    <p class="subtitle">Complete at least 4 frames. Use the target word correctly and try to add a connector.</p>
+    <div id="framesContainer">
+      <div class="frame-block">
+        <div class="label">longevity</div>
+        <div class="prompt">One key factor in longevity is ________, because ________.</div>
+        <textarea data-frame="0" placeholder="Write your completed sentence..."></textarea>
+      </div>
+      <div class="frame-block">
+        <div class="label">guideline</div>
+        <div class="prompt">A useful guideline for a healthy life is to ________. For example, ________.</div>
+        <textarea data-frame="1" placeholder="Write your completed sentence..."></textarea>
+      </div>
+      <div class="frame-block">
+        <div class="label">industrious</div>
+        <div class="prompt">Being industrious can help people live longer. In the reading, ________ shows this because ________.</div>
+        <textarea data-frame="2" placeholder="Write your completed sentence..."></textarea>
+      </div>
+      <div class="frame-block">
+        <div class="label">forbid / discourage</div>
+        <div class="prompt">Some communities forbid ________. They also discourage ________ in order to ________.</div>
+        <textarea data-frame="3" placeholder="Write your completed sentence..."></textarea>
+      </div>
+      <div class="frame-block">
+        <div class="label">lean</div>
+        <div class="prompt">A lean diet means ________. In Okinawa, people ________.</div>
+        <textarea data-frame="4" placeholder="Write your completed sentence..."></textarea>
+      </div>
+      <div class="frame-block">
+        <div class="label">ironically</div>
+        <div class="prompt">Ironically, ________ actually helped people live longer, even though ________.</div>
+        <textarea data-frame="5" placeholder="Write your completed sentence..."></textarea>
+      </div>
+      <div class="frame-block">
+        <div class="label">relieve</div>
+        <div class="prompt">Spending time with friends can relieve stress. As a result, ________.</div>
+        <textarea data-frame="6" placeholder="Write your completed sentence..."></textarea>
+      </div>
+      <div class="frame-block">
+        <div class="label">ikigai / moai</div>
+        <div class="prompt">My ikigai is ________. Having a moai (support group) is important because ________.</div>
+        <textarea data-frame="7" placeholder="Write your completed sentence..."></textarea>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btnSaveFrames">Save drafts</button>
+      <button type="button" class="btn btn-primary" id="btnToExplore">Next: Explore Questions</button>
+    </div>
+  </section>
+
+  <section class="panel" id="explore">
+    <h1>Explore the Questions</h1>
+    <p class="subtitle">Do not just answer - dig in. Use the Exploration Path for each question with a partner.</p>
+    <div class="path-steps">
+      <div class="path-step"><strong>1 RECALL</strong><span>What does the text say?</span></div>
+      <div class="path-step"><strong>2 CONNECT</strong><span>What about your world?</span></div>
+      <div class="path-step"><strong>3 SUPPORT</strong><span>Evidence + connector</span></div>
+      <div class="path-step"><strong>4 PUSH DEEPER</strong><span>What else could be true?</span></div>
+    </div>
+    <div id="questionsContainer">
+      <div class="q-card">
+        <h3><span class="q-num">Q1</span>Which longevity guideline from the reading do you think is most important for young people today? Why?</h3>
+        <div class="explore-grid">
+          <div class="explore-box"><label>Recall - text idea</label><textarea data-ex="0-recall" placeholder="Which guideline? (hard work / diet / friends / purpose / clean living)"></textarea></div>
+          <div class="explore-box"><label>Connect - my world</label><textarea data-ex="0-connect" placeholder="Why does this matter for students your age?"></textarea></div>
+          <div class="explore-box"><label>Support - evidence + connector</label><textarea data-ex="0-support" placeholder="For example / Because... (use a detail from the text)"></textarea></div>
+          <div class="explore-box"><label>Push deeper</label><textarea data-ex="0-push" placeholder="Would this still be true in 20 years? Why or why not?"></textarea></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <h3><span class="q-num">Q2</span>Do you have something like a moai or ikigai in your life? Explain.</h3>
+        <div class="explore-grid">
+          <div class="explore-box"><label>Recall - text idea</label><textarea data-ex="1-recall" placeholder="What is a moai? What is ikigai? (use the Word Bank)"></textarea></div>
+          <div class="explore-box"><label>Connect - my world</label><textarea data-ex="1-connect" placeholder="Who or what gives you support / purpose?"></textarea></div>
+          <div class="explore-box"><label>Support - evidence + connector</label><textarea data-ex="1-support" placeholder="For example... / As a result..."></textarea></div>
+          <div class="explore-box"><label>Push deeper</label><textarea data-ex="1-push" placeholder="What would change if you lost that support or purpose?"></textarea></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <h3><span class="q-num">Q3</span>What does your family forbid or discourage? Do you agree with those rules?</h3>
+        <div class="explore-grid">
+          <div class="explore-box"><label>Recall - text idea</label><textarea data-ex="2-recall" placeholder="What do Adventists / Okinawans forbid or discourage?"></textarea></div>
+          <div class="explore-box"><label>Connect - my world</label><textarea data-ex="2-connect" placeholder="One family rule that limits food, screens, or habits..."></textarea></div>
+          <div class="explore-box"><label>Support - evidence + connector</label><textarea data-ex="2-support" placeholder="I agree / disagree because..."></textarea></div>
+          <div class="explore-box"><label>Push deeper</label><textarea data-ex="2-push" placeholder="Is the rule about health, safety, or culture?"></textarea></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <h3><span class="q-num">Q4</span>Describe an industrious person you know. How does their hard work affect their health or happiness?</h3>
+        <div class="explore-grid">
+          <div class="explore-box"><label>Recall - text idea</label><textarea data-ex="3-recall" placeholder="How is Tonino (Sardinia) industrious?"></textarea></div>
+          <div class="explore-box"><label>Connect - my world</label><textarea data-ex="3-connect" placeholder="Name the person. What work do they do?"></textarea></div>
+          <div class="explore-box"><label>Support - evidence + connector</label><textarea data-ex="3-support" placeholder="As a result / Therefore, their health or mood..."></textarea></div>
+          <div class="explore-box"><label>Push deeper</label><textarea data-ex="3-push" placeholder="Can too much hard work hurt longevity? When?"></textarea></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <h3><span class="q-num">Q5</span>Ironically, some healthy habits come from difficult times. Can you think of an example from your family or culture?</h3>
+        <div class="explore-grid">
+          <div class="explore-box"><label>Recall - text idea</label><textarea data-ex="4-recall" placeholder="What was ironic about the Okinawan diet?"></textarea></div>
+          <div class="explore-box"><label>Connect - my world</label><textarea data-ex="4-connect" placeholder="A hard time that taught a healthy habit..."></textarea></div>
+          <div class="explore-box"><label>Support - evidence + connector</label><textarea data-ex="4-support" placeholder="Ironically... / Even though..."></textarea></div>
+          <div class="explore-box"><label>Push deeper</label><textarea data-ex="4-push" placeholder="Should we wait for hardship to build good habits?"></textarea></div>
+        </div>
+      </div>
+    </div>
+    <div class="card soft" style="margin-top:1rem">
+      <strong style="color:var(--green)">Dialogue stems for your partner</strong>
+      <p style="font-size:0.88rem;margin-top:0.4rem;color:var(--ink-soft)">
+        "Can you point to the part of the reading that made you think that?" -
+        "How is that similar to or different from your life?" -
+        "What would someone who disagrees say?" -
+        "Can you add for example or as a result?"
+      </p>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btnSaveExplore">Save notes</button>
+      <button type="button" class="btn btn-primary" id="btnToWrite">Next: Mini Writing</button>
+    </div>
+  </section>
+
+  <section class="panel" id="write">
+    <h1>Mini Writing Task</h1>
+    <p class="subtitle">Choose one prompt. Aim for 5-7 sentences and at least 5 target words.</p>
+    <div class="prompt-choice" id="promptChoice">
+      <div class="prompt-opt" data-prompt="A" id="promptA">
+        <strong>Prompt A</strong>
+        <p>What is your personal guideline for a long and healthy life? Support with examples from the reading and your experience.</p>
+      </div>
+      <div class="prompt-opt" data-prompt="B" id="promptB">
+        <strong>Prompt B</strong>
+        <p>Explain why social relationships (moai / ikigai) might be as important as diet for longevity. Use evidence from the text.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <strong style="color:var(--green);font-size:0.9rem">Pre-write exploration</strong>
+      <div class="explore-grid" style="margin-top:0.6rem">
+        <div class="explore-box">
+          <label>Recall - text idea</label>
+          <textarea id="preRecall" placeholder="One strong idea from the reading..."></textarea>
+        </div>
+        <div class="explore-box">
+          <label>Connect - my world</label>
+          <textarea id="preConnect" placeholder="How this links to young people..."></textarea>
+        </div>
+        <div class="explore-box">
+          <label>Support - evidence + connector</label>
+          <textarea id="preSupport" placeholder="Fact / name / number + because / for example..."></textarea>
+        </div>
+        <div class="explore-box">
+          <label>Push deeper</label>
+          <textarea id="prePush" placeholder="Counter-idea or extra reason..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="writing-area">
+      <textarea id="essay" placeholder="Write your paragraph here..."></textarea>
+      <div class="word-count"><span id="wordCount">0</span> words - aim for 80-150</div>
+    </div>
+    <h2><span>05</span> Target Word Tracker</h2>
+    <div class="tracker" id="tracker">
+      <label><input type="checkbox" /> longevity</label>
+      <label><input type="checkbox" /> guideline</label>
+      <label><input type="checkbox" /> industrious</label>
+      <label><input type="checkbox" /> barely</label>
+      <label><input type="checkbox" /> privilege</label>
+      <label><input type="checkbox" /> forbid</label>
+      <label><input type="checkbox" /> discourage</label>
+      <label><input type="checkbox" /> lean (diet)</label>
+      <label><input type="checkbox" /> ironically</label>
+      <label><input type="checkbox" /> relieve</label>
+      <label><input type="checkbox" /> moai</label>
+      <label><input type="checkbox" /> ikigai</label>
+    </div>
+    <h2><span>OK</span> Self-Check</h2>
+    <div class="card soft">
+      <ul class="checklist">
+        <li><input type="checkbox" id="c1" /> <label for="c1">I used at least 5 different words from the Word Bank.</label></li>
+        <li><input type="checkbox" id="c2" /> <label for="c2">Each word is used in a grammatically correct sentence.</label></li>
+        <li><input type="checkbox" id="c3" /> <label for="c3">I included at least one logical connector (because, for example, as a result, in addition).</label></li>
+        <li><input type="checkbox" id="c4" /> <label for="c4">My paragraph has a clear main idea and specific examples.</label></li>
+      </ul>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btnSaveWriting">Save writing</button>
+      <button type="button" class="btn btn-primary" id="btnFinish">Finish worksheet</button>
+    </div>
+  </section>
+
+  <section class="panel" id="answers">
+    <h1>Answer Key</h1>
+    <p class="subtitle">Collocations: 1 exceptional longevity · 2 a lean diet/lifestyle · 3 relieve stress/pain · 4 a special privilege · 5 follow/give guidelines · 6 forbid/discourage smoking/alcohol/red meat</p>
+    <p class="subtitle">Writing: claim + evidence + connector. Sample frames in class PowerPoint.</p>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="btnBackMatch">Back to Match</button>
+      <button type="button" class="btn btn-primary" id="btnGoWrite">Go to Writing</button>
+    </div>
+  </section>
+</main>
+
+<footer>Unit 10B - In Search of Longevity - Interactive Vocabulary Worksheet</footer>
+<div class="toast" id="toast"></div>
+
+</body>
+<script src="app.js"></script>
+</html>
